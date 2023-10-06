@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Todo List</h2>
+
+<form action="/todos" method="post">
+  <label for="task">New Task:</label><br>
+  <input type="text" id="task" name="task"><br>
+  <input type="submit" value="Submit">
+</form> 
+
+<ul id="todoList"></ul>
+
+<script>
+// Utilisez JavaScript pour récupérer la liste des tâches du serveur et les afficher
+fetch('/todos')
+  .then(response => response.json())
+  .then(todos => {
+    const todoList = document.getElementById('todoList');
+    todos.forEach(todo => {
+      const li = document.createElement('li');
+      li.textContent = todo;
+      todoList.appendChild(li);
+    });
+  });
+</script>
+
+</body>
+</html>
+
